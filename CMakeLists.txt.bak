@@ -37,7 +37,11 @@ install(
   DESTINATION share/${PROJECT_NAME}
 )
 
-install(DIRECTORY launch description
-DESTINATION share/${PROJECT_NAME})
+# 安装Python脚本作为可执行文件
+install(PROGRAMS
+  odom_to_tf.py
+  check_tf.py
+  DESTINATION lib/${PROJECT_NAME}
+)
 
 ament_package()

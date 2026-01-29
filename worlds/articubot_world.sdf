@@ -1,14 +1,21 @@
 <?xml version="1.0" ?>
 <sdf version="1.7">
-  <world name="default">
-    <!-- Scene settings -->
+  <world name="articubot_world">
+    <!-- 物理引擎设置 -->
+    <physics name="default_physics" default="0" type="ode">
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1</real_time_factor>
+      <real_time_update_rate>1000</real_time_update_rate>
+    </physics>
+
+    <!-- 场景设置 -->
     <scene>
       <ambient>0.4 0.4 0.4 1.0</ambient>
       <background>0.7 0.7 0.7 1.0</background>
       <shadows>true</shadows>
     </scene>
 
-    <!-- A global light source -->
+    <!-- 太阳光照 -->
     <light name="sun" type="directional">
       <cast_shadows>true</cast_shadows>
       <pose>0 0 10 0 0 0</pose>
@@ -23,7 +30,7 @@
       <direction>-0.5 0.1 -0.9</direction>
     </light>
 
-    <!-- A ground plane -->
+    <!-- 地面 -->
     <model name="ground_plane">
       <static>true</static>
       <link name="link">
@@ -64,13 +71,13 @@
       </link>
     </model>
 
-    <!-- Gravity -->
+    <!-- 重力设置 -->
     <gravity>0 0 -9.8066</gravity>
 
-    <!-- Magnetic field -->
+    <!-- 磁场设置 -->
     <magnetic_field>6e-06 2.3e-05 -4.2e-05</magnetic_field>
 
-    <!-- Atmosphere -->
+    <!-- 大气设置 -->
     <atmosphere type="adiabatic"/>
   </world>
 </sdf>

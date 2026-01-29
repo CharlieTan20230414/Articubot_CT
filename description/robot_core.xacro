@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <xacro:robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
-    <xacro:include filename="$(find Articubot_CT)/description/inertial_macros.xacro"/>
+    <xacro:include filename="inertial_macros.xacro"/>
 
     <material name="white">
         <color rgba="1 1 1 1" />
@@ -83,8 +83,14 @@
             </geometry>
         </collision>
         <xacro:chassis_inertial mass="0.5" x="0.3" y="0.3" z="0.15"/>
+
+         
     </link>
     
+    <gazebo reference="chassis">
+        <material>Gazebo/White</material>
+    </gazebo>
+
     <!-- LEFT WHEEL LINK -->
 
     <joint name="left_wheel_joint" type="continuous">
@@ -92,6 +98,7 @@
         <child link="left_wheel"/>
         <origin xyz="0 0.175 0" rpy="-$(eval pi/2) 0 0"/>
         <axis xyz="0 0 1"/>
+        <limit effort="10.0" velocity="10.0"/>
     </joint>
 
     <link name="left_wheel">
@@ -107,7 +114,13 @@
             </geometry>
         </collision>
         <xacro:wheel_inertial mass="0.1" length="0.04" radius="0.05"/>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+         
     </link>
+
+    <gazebo reference="left_wheel">
+        <material>Gazebo/Blue</material>
+    </gazebo>
 
     <!-- RIGHT WHEEL LINK -->
 
@@ -116,6 +129,7 @@
         <child link="right_wheel"/>
         <origin xyz="0 -0.175 0" rpy="$(eval pi/2) 0 0"/>
         <axis xyz="0 0 -1"/>
+        <limit effort="10.0" velocity="10.0"/>
     </joint>
 
     <link name="right_wheel">
@@ -131,7 +145,13 @@
             </geometry>
         </collision>
         <xacro:wheel_inertial mass="0.1" length="0.04" radius="0.05"/>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+         
     </link>
+
+    <gazebo reference="right_wheel">
+        <material>Gazebo/Blue</material>
+    </gazebo>
 
     <!-- CASTER WHEEL LINK -->
 
@@ -154,6 +174,14 @@
             </geometry>
         </collision>
         <xacro:caster_wheel_inertial mass="0.1" radius="0.05"/>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+         
     </link>
+
+    <gazebo reference="caster_wheel">
+        <material>Gazebo/Black</material>
+        <mu1 value="0.001"/>
+        <mu2 value="0.001"/>
+    </gazebo>
 
 </xacro:robot>
