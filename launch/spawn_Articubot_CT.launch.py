@@ -61,6 +61,7 @@ def generate_launch_description():
     bridge_config = [
         '/cmd_vel@geometry_msgs/msg/Twist@ignition.msgs.Twist',
         '/model/Articubot_CT/odometry@nav_msgs/msg/Odometry@ignition.msgs.Odometry',
+        '/joint_states@sensor_msgs/msg/JointState@ignition.msgs.JointState',
     ]
     
     bridge = Node(
@@ -77,7 +78,12 @@ def generate_launch_description():
         executable='odom_to_tf',
         name='odom_to_tf',
         output='screen',
-        parameters=[{'use_sim_time': True}]
+        parameters=[{
+            'use_sim_time': True,
+            'odom_topic': '/model/Articubot_CT/odometry',
+            'odom_frame': 'odom',
+            'base_frame': 'base_link'
+        }]
     )
 
     # 添加延迟，确保Gazebo完全启动

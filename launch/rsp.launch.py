@@ -107,14 +107,14 @@ def generate_launch_description():
             cmd=[
                 'ros2', 'topic', 'pub', '-r', '10', 
                 '/joint_states', 'sensor_msgs/msg/JointState',
-                '{\"header\": {\"stamp\": {\"sec\": 0, \"nanosec\": 0}, \"frame_id\": \"world\"}, \"name\": [\"joint1\", \"joint2\"], \"position\": [0.0, 0.0], \"velocity\": [0.0, 0.0], \"effort\": [0.0, 0.0]}'
+                '{\"header\": {\"stamp\": {\"sec\": 0, \"nanosec\": 0}, \"frame_id\": \"world\"}, \"name\": [\"left_wheel_joint\", \"right_wheel_joint\", \"caster_wheel_joint\"], \"position\": [0.0, 0.0, 0.0], \"velocity\": [0.0, 0.0, 0.0], \"effort\": [0.0, 0.0, 0.0]}'
             ],
             output='screen',
             name='static_joint_state_publisher'
         )
     
     # 3. RViz2
-    rviz_config_file = os.path.join(pkg_path, 'rviz', 'display.rviz')
+    rviz_config_file = os.path.join(pkg_path, 'config', 'view_bot.rviz')
     
     # 如果配置文件不存在，创建默认配置
     if not os.path.exists(rviz_config_file):
@@ -138,7 +138,7 @@ def generate_launch_description():
     return LaunchDescription([
         DeclareLaunchArgument(
             'use_sim_time',
-            default_value='false',
+            default_value='true',
             description='Use simulation time if true'
         ),
         

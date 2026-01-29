@@ -44,6 +44,11 @@
                 <publish_odom_tf>false</publish_odom_tf>
                 <enable_covariance>true</enable_covariance>
             </plugin>
+
+            <!-- 关节状态发布插件 -->
+            <plugin name="gz::sim::systems::JointStatePublisher" filename="libgz-sim-joint-state-publisher-system.so">
+                <update_rate>50</update_rate>
+            </plugin>
         </gazebo>
 
 </robot>
