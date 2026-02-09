@@ -26,6 +26,7 @@ setup(
         'console_scripts': [
             'odom_to_tf = Articubot_CT.odom_to_tf:main',
             'check_tf = Articubot_CT.check_tf:main',
+            'gz_joint_state_bridge = Articubot_CT.gz_joint_state_bridge:main',
         ],
     },
 )

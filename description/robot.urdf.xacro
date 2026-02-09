@@ -2,6 +2,7 @@
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="Articubot_CT">
 
     <xacro:include filename="robot_core.xacro" />
+
     <xacro:include filename="gazebo_control.xacro" />
 
 </robot>
