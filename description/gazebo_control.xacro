@@ -1,66 +1,60 @@
 <?xml version="1.0"?>
-<robot xmlns:xacro="http://www.ros.org/wiki/xacro" >
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
-<!-- 差速驱动插件 -->
-        <gazebo>
-            <plugin name="gz::sim::systems::DiffDrive" filename="libgz-sim-diff-drive-system.so">
-                <left_joint>left_wheel_joint</left_joint>
-                <right_joint>right_wheel_joint</right_joint>
-                <wheel_separation>0.35</wheel_separation>
-                <wheel_radius>0.05</wheel_radius>
-                
-                <max_wheel_torque>200</max_wheel_torque>
-                <max_wheel_acceleration>10.0</max_wheel_acceleration>
+    <!-- 差速驱动插件 -->
+    <gazebo>
+        <plugin name="gz::sim::systems::DiffDrive" filename="libgz-sim-diff-drive-system.so">
+            <left_joint>left_wheel_joint</left_joint>
+            <right_joint>right_wheel_joint</right_joint>
+            <wheel_separation>0.35</wheel_separation>
+            <wheel_radius>0.05</wheel_radius>
+            <max_wheel_torque>200</max_wheel_torque>
+            <max_wheel_acceleration>10.0</max_wheel_acceleration>
+            <odometry_frame>odom</odometry_frame>
+            <robot_base_frame>base_link</robot_base_frame>
+            <publish_odom>true</publish_odom>
+            <publish_odom_tf>true</publish_odom_tf>
+            <publish_wheel_tf>true</publish_wheel_tf>
+            <left_joint_parent>base_link</left_joint_parent>
+            <right_joint_parent>base_link</right_joint_parent>
+            <topic>/cmd_vel</topic>
+            <odom_topic>/model/Articubot_CT/odometry</odom_topic>
+            <odom_frame>odom</odom_frame>
+            <enable_covariance>true</enable_covariance>
+        </plugin>
+    </gazebo>
 
-                <odometry_frame>odom</odometry_frame>
-                <robot_base_frame>base_link</robot_base_frame>
-                
-                <publish_odom>true</publish_odom>                
-                <publish_odom_tf>true</publish_odom_tf>
-                <publish_wheel_tf>true</publish_wheel_tf>
-                <left_joint_parent>base_link</left_joint_parent>
-                <right_joint_parent>base_link</right_joint_parent>
-                <topic>/cmd_vel</topic>
-                <odom_topic>/model/Articubot_CT/odometry</odom_topic>
-                <odom_frame>odom</odom_frame>
-                
-                
-                <enable_covariance>true</enable_covariance>
-            </plugin>
+    <!-- 驱动轮属性 -->
+    <gazebo reference="left_wheel">
+        <mu1>1.0</mu1>
+        <mu2>1.0</mu2>
+        <material>Gazebo/Blue</material>
+        <ode>
+            <kp>10000000.0</kp>
+            <kd>1.0</kd>
+            <minDepth>0.001</minDepth>
+            <maxVel>10.0</maxVel>
+        </ode>
+    </gazebo>
 
-        <!-- 驱动轮关节 -->
-        <gazebo reference="left_wheel">
-            <mu1>1.0</mu1>
-            <mu2>1.0</mu2>
-            <material>Gazebo/Blue</material>
-            <ode>
-                <kp>10000000.0</kp>
-                <kd>1.0</kd>
-                <minDepth>0.001</minDepth>
-                <maxVel>10.0</maxVel>
-            </ode>
-        </gazebo>
+    <gazebo reference="right_wheel">
+        <mu1>1.0</mu1>
+        <mu2>1.0</mu2>
+        <material>Gazebo/Blue</material>
+        <ode>
+            <kp>10000000.0</kp>
+            <kd>1.0</kd>
+            <minDepth>0.001</minDepth>
+            <maxVel>10.0</maxVel>
+        </ode>
+    </gazebo>
 
-        <gazebo reference="right_wheel">
-            <mu1>1.0</mu1>
-            <mu2>1.0</mu2>
-            <material>Gazebo/Blue</material>
-            <ode>
-                <kp>10000000.0</kp>
-                <kd>1.0</kd>
-                <minDepth>0.001</minDepth>
-                <maxVel>10.0</maxVel>
-            </ode>
-        </gazebo>
-
-        
-
-            <!-- 关节状态发布插件 -->
-            <plugin name="gz::sim::systems::JointStatePublisher" filename="libgz-sim-joint-state-publisher-system.so">
-                <update_rate>50</update_rate>
-            </plugin>
-        </gazebo>
+    <!-- 关节状态发布插件（必须） -->
+    <gazebo>
+        <plugin name="gz::sim::systems::JointStatePublisher" filename="libgz-sim-joint-state-publisher-system.so">
+            <update_rate>50</update_rate>
+            <topic>/model/Articubot_CT/joint_state</topic>   <!-- 明确指定话题，与桥接器匹配 -->
+        </plugin>
+    </gazebo>
 
 </robot>
-
-
